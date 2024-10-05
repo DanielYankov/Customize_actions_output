@@ -11,8 +11,11 @@ jobs:
         run: |
           echo "::notice title=Test Passed::[PASS] Test ran successfully"
 
+      - name: Annotate warning
+        run: echo "::warning title=Test Warning::[Warning] Test sends warning"
+
       - name: Annotate failure
-        # if: ${{ failure() }}
+        if: ${{ failure() }}
         run: echo "::error title=Test Failed::[FAIL] Test encountered an error"
 
       - name: Run tests with color
