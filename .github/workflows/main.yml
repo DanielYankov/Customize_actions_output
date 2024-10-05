@@ -19,6 +19,7 @@ jobs:
 
       - name: Run tests with color
         run: |
+          echo "Default"
           echo -e "\033[31m[FAIL] Test encountered an error\033[0m"  # Red color
           echo -e "\033[32m[PASS] Test ran successfully\033[0m"  # Green color
           echo -e "\033[33m[FAIL] Test color Yellow\033[0m"  # Yellow color
@@ -42,6 +43,10 @@ jobs:
           echo -e "\033[101m[FAIL] Test encountered an error\033[0m"  # Red color
           echo -e "\033[102m[PASS] Test ran successfully\033[0m"  # Green color
           echo -e "\033[103m[FAIL] Test color Yellow\033[0m"  # Yellow color
+          echo "Combined"
+          echo -e "\033[42m[PASS]\033[1;32m Test ran successfully\033[0m"  # Green color
+          echo -e "\033[42m[FAIL]\033[1;32m Test failed\033[0m"  # Red color
+          echo -e "\033[42m[WARNING]\033[1;32m Test send warning\033[0m"  # Yellow color
 
 
       - name: Run tests with emojis
