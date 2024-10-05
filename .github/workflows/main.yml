@@ -61,9 +61,10 @@ jobs:
           echo -e "\033[31m[FAIL] Test2 failed\033[0m"
           echo -e "\033[33m[Warning] Test3 sends warning\033[0m"
           echo "::endgroup::"
-          
-      - name: Archive code coverage results
+
+      - name: 'Upload Artifact'
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage-report
-          path: output/test/code-coverage.html
+          name: my-artifact
+          path: my_file.txt
+          retention-days: 5
