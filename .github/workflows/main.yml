@@ -34,8 +34,8 @@ jobs:
 
       - name: Run tests with grouping
         run: |
-          echo "::group::Running tests"
-          echo "\033[32m[PASS] Test1 ran successfully\033[0m"
-          echo "\033[31m[FAIL] Test2 failed\033[0m"
-          echo "\033[33m[Warning] Test3 sends warning\033[0m"
+          echo "::group::Grouped Tests:"
+          echo -e "\033[32m[PASS] Test1 ran successfully\033[0m"
+          echo -e "\033[31m[FAIL] Test2 failed\033[0m"
+          echo -e "\033[33m[Warning] Test3 sends warning\033[0m"
           echo "::endgroup::"
