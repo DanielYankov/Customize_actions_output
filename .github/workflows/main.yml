@@ -19,5 +19,21 @@ jobs:
 
       - name: Run tests with color
         run: |
-          echo -e "\033[32m[PASS] Test ran successfully\033[0m"  # Green color
-          echo -e "\033[31m[FAIL] Test encountered an error\033[0m"  # Red color
+          echo -e "\033[31m[PASS] Test encountered an error\033[0m"  # Red color
+          echo -e "\033[32m[FAIL] Test ran successfully\033[0m"  # Green color
+          echo -e "\033[33m[FAIL] Test color Yellow\033[0m"  # Yellow color
+          echo -e "\033[34m[FAIL] Test color Blue\033[0m"  # Blue color
+          echo -e "\033[35m[FAIL] Test color Magenta\033[0m"  # Magenta color
+          echo -e "\033[36m[FAIL] Test color Cyan\033[0m"  # Cyan color
+          echo -e "\033[37m[FAIL] Test color White\033[0m"  # White color
+
+      - name: Run tests with emojis
+        run: |
+          echo "✅ [PASS] Test ran successfully"
+          echo "❌ [FAIL] Test failed"
+
+      - name: Run tests with grouping
+        run: |
+          echo "::group::Running tests"
+          echo "[PASS] Test ran successfully"
+          echo "::endgroup::"
