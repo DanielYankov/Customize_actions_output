@@ -26,6 +26,23 @@ jobs:
           echo -e "\033[35m[FAIL] Test color Magenta\033[0m"  # Magenta color
           echo -e "\033[36m[FAIL] Test color Cyan\033[0m"  # Cyan color
           echo -e "\033[37m[FAIL] Test color White\033[0m"  # White color
+          echo "Bold Text"
+          echo -e "\033[1;31m[FAIL] Test encountered an error\033[0m"  # Red color
+          echo -e "\033[1;32m[PASS] Test ran successfully\033[0m"  # Green color
+          echo -e "\033[1;33m[FAIL] Test color Yellow\033[0m"  # Yellow color
+          echo "Background Color"
+          echo -e "\033[41m[FAIL] Test encountered an error\033[0m"  # Red color
+          echo -e "\033[42m[PASS] Test ran successfully\033[0m"  # Green color
+          echo -e "\033[43m[FAIL] Test color Yellow\033[0m"  # Yellow color
+          echo "High Intensity "
+          echo -e "\033[91m[FAIL] Test encountered an error\033[0m"  # Red color
+          echo -e "\033[92m[PASS] Test ran successfully\033[0m"  # Green color
+          echo -e "\033[93m[FAIL] Test color Yellow\033[0m"  # Yellow color
+          echo "High Intensity Background"
+          echo -e "\033[101m[FAIL] Test encountered an error\033[0m"  # Red color
+          echo -e "\033[102m[PASS] Test ran successfully\033[0m"  # Green color
+          echo -e "\033[103m[FAIL] Test color Yellow\033[0m"  # Yellow color
+
 
       - name: Run tests with emojis
         run: |
