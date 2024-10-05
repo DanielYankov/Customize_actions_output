@@ -1,0 +1,18 @@
+on:
+  workflow_dispatch/
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run test
+        run: |
+          # Simulating a test condition
+          echo "[PASS] Test ran successfully"
+
+      - name: Annotate success
+        run: |
+          echo "::notice title=Test Passed::[PASS] Test ran successfully"  # Simulates green output
+
+      - name: Annotate failure (example)
+        if: ${{ failure() }}
+        run: echo "::error title=Test Failed::[FAIL] Test encountered an error"
