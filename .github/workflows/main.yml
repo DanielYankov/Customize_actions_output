@@ -7,16 +7,11 @@ jobs:
       - name: Default test
         run: echo "[PASS] Test ran successfully"
           
-      - name: Annotate success
+      - name: Run tests with Annotations
         run: |
-          echo "::notice title=Test Passed::[PASS] Test ran successfully"
-
-      - name: Annotate warning
-        run: echo "::warning title=Test Warning::[Warning] Test sends warning"
-
-      - name: Annotate failure
-        if: ${{ failure() }}
-        run: echo "::error title=Test Failed::[FAIL] Test encountered an error"
+            echo "::notice title=Test Passed::[PASS] Test ran successfully"
+            echo "::warning title=Test Warning::[Warning] Test sends warning"
+            echo "::error title=Test Failed::[FAIL] Test encountered an error"
 
       - name: Run tests with color
         run: |
