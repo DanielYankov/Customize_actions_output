@@ -4,17 +4,15 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Run test
-        run: |
-          # Simulating a test condition
-          echo "[PASS] Test ran successfully"
-
+      - name: Default test
+        run: echo "[PASS] Test ran successfully"
+          
       - name: Annotate success
         run: |
-          echo "::notice title=Test Passed::[PASS] Test ran successfully"  # Simulates green output
+          echo "::notice title=Test Passed::[PASS] Test ran successfully"
 
-      - name: Annotate failure (example)
-        if: ${{ failure() }}
+      - name: Annotate failure
+        # if: ${{ failure() }}
         run: echo "::error title=Test Failed::[FAIL] Test encountered an error"
 
       - name: Run tests with color
@@ -61,10 +59,3 @@ jobs:
           echo -e "\033[31m[FAIL] Test2 failed\033[0m"
           echo -e "\033[33m[Warning] Test3 sends warning\033[0m"
           echo "::endgroup::"
-
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v4
-        with:
-          name: my-artifact
-          path: my_file.txt
-          retention-days: 5
