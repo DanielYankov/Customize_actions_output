@@ -47,14 +47,15 @@ jobs:
 
       - name: Run tests with emojis
         run: |
-          echo ":white_check_mark: [PASS] Test ran successfully"
-          echo ":heavy_check_mark: [PASS] Test ran successfully"
-          echo ":green_circle: [PASS] Test ran successfully"
+          echo "✅ [PASS] Test ran successfully"
+          echo "🟢 [PASS] Test ran successfully"
+          echo "✔️ [PASS] Test ran successfully"
           
-          echo ":warning: [FAIL] Test warning"
+          echo "⚠️ [FAIL] Test warning"
 
-          echo ":red_circle: [FAIL] Test failed"
-          echo ":fire: [FAIL] Test failed"
+          echo "❌[FAIL] Test failed"
+          echo "🔴 [FAIL] Test failed"
+          echo "🔥 [FAIL] Test failed"
 
       - name: Run tests with grouping
         run: |
