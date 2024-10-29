@@ -14,3 +14,11 @@ jobs:
             exit 1
           fi
         continue-on-error: true
+      - name: Final Summary
+        if: failure()
+        run: |
+          echo "### Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Errors detected in the following steps:" >> $GITHUB_STEP_SUMMARY
+          echo "- Step 1: Something went wrong with reason XYZ" >> $GITHUB_STEP_SUMMARY
+          echo "- Step 2: Another issue occurred" >> $GITHUB_STEP_SUMMARY
+
