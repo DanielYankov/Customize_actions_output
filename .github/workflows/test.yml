@@ -24,12 +24,12 @@ jobs:
         run: |
           echo "Running test"
           exit 1
-        continue-on-error: true
-
-      - name: Test 1 Summary
         if: failure()
         run: |
           echo "- Test 1 Failed" >> $GITHUB_STEP_SUMMARY
+        continue-on-error: true
+
+        
         
           
 
