@@ -14,11 +14,31 @@ jobs:
             exit 1
           fi
         continue-on-error: true
-      - name: Final Summary
-        if: always()
+
+      - name: Init summary
         run: |
           echo "### Workflow Summary" >> $GITHUB_STEP_SUMMARY
           echo "Errors detected in the following steps:" >> $GITHUB_STEP_SUMMARY
-          echo "- Step 1: Something went wrong with reason XYZ" >> $GITHUB_STEP_SUMMARY
-          echo "- Step 2: Another issue occurred" >> $GITHUB_STEP_SUMMARY
+
+      - name: Dummy fail test run
+        run: |
+          echo "Running test"
+          exit 1
+        continue-on-error: true
+
+      - name: Test 1 Summary
+        if: failure()
+        run: |
+          echo "- Test 1 Failed" >> $GITHUB_STEP_SUMMARY
+          
+
+      - name: Dummy pass test run
+        run: |
+          echo "Running test pass"
+        continue-on-error: true
+
+      - name: Test 2 summary
+        if: failure()
+        run: |
+          echo "- Test 2 Failed" >> $GITHUB_STEP_SUMMARY
 
