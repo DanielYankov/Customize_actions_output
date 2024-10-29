@@ -15,7 +15,7 @@ jobs:
           fi
         continue-on-error: true
       - name: Final Summary
-        if: failure()
+        if: always()
         run: |
           echo "### Workflow Summary" >> $GITHUB_STEP_SUMMARY
           echo "Errors detected in the following steps:" >> $GITHUB_STEP_SUMMARY
