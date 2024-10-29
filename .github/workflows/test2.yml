@@ -7,43 +7,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Init Summary
+        run: |
+          echo "### Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## Errors:" >> $GITHUB_STEP_SUMMARY
 
       - name: Step 1 - Run tests
-        id: run_tests
+        id: run_tests_1
         run: |
           echo "Running tests..."
-          exit 1  # Simulate a failure here
+          exit 1  # Simulate failure
         continue-on-error: true
 
       - name: Log Test Failure
-        if: steps.run_tests.outcome == 'failure'
+        if: steps.run_tests_1.outcome == 'failure'
         run: |
-          echo "## Workflow Summary" >> $GITHUB_STEP_SUMMARY
-          echo "### Errors:" >> $GITHUB_STEP_SUMMARY
           echo "- 'Step 1 - Run tests' failed." >> $GITHUB_STEP_SUMMARY
 
-      - name: Step 2 - Lint code
-        id: lint_code
+      - name: Step 2 - Run tests
+        id: run_tests_2
         run: |
-          echo "Linting code..."
-          exit 1  # Simulate another failure here
+          echo "Running tests..."
+          # Simulate successful test
+        continue-on-error: true
 
-      - name: Log Lint Failure
-        if: failure() && steps.lint_code.outcome == 'failure'
+      - name: Log Test Failure
+        if: steps.run_tests_2.outcome == 'failure'
         run: |
-          echo "### Errors:" >> $GITHUB_STEP_SUMMARY
-          echo "- 'Step 2 - Lint code' failed." >> $GITHUB_STEP_SUMMARY
+          echo "- 'Step 2 - Run tests' failed." >> $GITHUB_STEP_SUMMARY
 
-      - name: Step 3 - Build project
-        id: build_project
+      - name: Step 3 - Run tests
+        id: run_tests_3
         run: |
-          echo "Building project..."
+          echo "Running tests..."
+          exit 1  # Simulate failure
+        continue-on-error: true
 
-      - name: Log Build Failure
-        if: failure() && steps.build_project.outcome == 'failure'
+      - name: Log Test Failure
+        if: steps.run_tests_3.outcome == 'failure'
         run: |
-          echo "### Errors:" >> $GITHUB_STEP_SUMMARY
-          echo "- 'Step 3 - Build project' failed." >> $GITHUB_STEP_SUMMARY
+          echo "- 'Step 3 - Run tests' failed." >> $GITHUB_STEP_SUMMARY
 
       - name: Final Summary
         if: always()
