@@ -28,6 +28,7 @@ jobs:
         id: run_tests_2
         run: |
           echo "Running tests..."
+          echo "::notice title=Test Passed::[PASS] Test ran successfully"
           # Simulate successful test
         continue-on-error: true
 
@@ -40,7 +41,7 @@ jobs:
         id: run_tests_3
         run: |
           echo "Running tests..."
-          exit 3  # Simulate failure
+          gosho3  # Simulate failure
         continue-on-error: true
 
       - name: Log Test Failure
