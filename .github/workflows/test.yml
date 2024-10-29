@@ -42,5 +42,5 @@ jobs:
         if: failure()
         run: |
           echo "- Test 2 Failed" >> $GITHUB_STEP_SUMMARY
-        continue-on-error: true
+        continue-on-error: true 
 
