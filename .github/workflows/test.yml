@@ -1,0 +1,16 @@
+on: [workflow_dispatch, push]
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    outputs:
+      error_message: ${{ steps.check_step.outputs.error_message }}
+    steps:
+      - name: Run a task that might fail
+        id: check_step
+        run: |
+          if ! some_command; then
+            echo "error_message=Task failed due to X reason" >> $GITHUB_ENV
+            exit 1
+          fi
+        continue-on-error: true
