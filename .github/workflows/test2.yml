@@ -1,0 +1,31 @@
+name: Workflow with Failure Summary Logging
+
+on: [push]
+
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Step 1 - Successful step
+        run: echo "This step will pass."
+
+      - name: Step 2 - Intentional failure
+        id: fail_step
+        run: |
+          echo "This step will intentionally fail."
+          exit 1
+        continue-on-error: false  # This makes the job stop on failure
+
+      - name: Log Failure to Summary
+        if: failure()  # Runs only if the previous step failed
+        run: |
+          echo "## Workflow Summary" >> $GITHUB_STEP_SUMMARY
+          echo "### Errors:" >> $GITHUB_STEP_SUMMARY
+          echo "- 'Step 2 - Intentional failure' failed." >> $GITHUB_STEP_SUMMARY
+
+      - name: Final Step
+        if: always()  # Ensures this runs regardless of the previous outcome
+        run: echo "Final step ran."
