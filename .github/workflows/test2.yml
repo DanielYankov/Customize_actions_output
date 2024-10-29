@@ -1,31 +1,50 @@
-name: Workflow with Failure Summary Logging
+name: Workflow with Multiple Failure Summaries
 
 on: [push]
 
 jobs:
   example_job:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Step 1 - Successful step
-        run: echo "This step will pass."
-
-      - name: Step 2 - Intentional failure
-        id: fail_step
+      - name: Step 1 - Run tests
+        id: run_tests
         run: |
-          echo "This step will intentionally fail."
-          exit 1
-        continue-on-error: false  # This makes the job stop on failure
+          echo "Running tests..."
+          exit 1  # Simulate a failure here
 
-      - name: Log Failure to Summary
-        if: failure()  # Runs only if the previous step failed
+      - name: Log Test Failure
+        if: failure() && steps.run_tests.outcome == 'failure'
         run: |
           echo "## Workflow Summary" >> $GITHUB_STEP_SUMMARY
           echo "### Errors:" >> $GITHUB_STEP_SUMMARY
-          echo "- 'Step 2 - Intentional failure' failed." >> $GITHUB_STEP_SUMMARY
+          echo "- 'Step 1 - Run tests' failed." >> $GITHUB_STEP_SUMMARY
 
-      - name: Final Step
-        if: always()  # Ensures this runs regardless of the previous outcome
-        run: echo "Final step ran."
+      - name: Step 2 - Lint code
+        id: lint_code
+        run: |
+          echo "Linting code..."
+          exit 1  # Simulate another failure here
+
+      - name: Log Lint Failure
+        if: failure() && steps.lint_code.outcome == 'failure'
+        run: |
+          echo "### Errors:" >> $GITHUB_STEP_SUMMARY
+          echo "- 'Step 2 - Lint code' failed." >> $GITHUB_STEP_SUMMARY
+
+      - name: Step 3 - Build project
+        id: build_project
+        run: |
+          echo "Building project..."
+
+      - name: Log Build Failure
+        if: failure() && steps.build_project.outcome == 'failure'
+        run: |
+          echo "### Errors:" >> $GITHUB_STEP_SUMMARY
+          echo "- 'Step 3 - Build project' failed." >> $GITHUB_STEP_SUMMARY
+
+      - name: Final Summary
+        if: always()
+        run: |
+          echo "Final steps completed. Check the above errors for details."
