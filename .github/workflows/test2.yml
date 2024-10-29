@@ -40,7 +40,7 @@ jobs:
         id: run_tests_3
         run: |
           echo "Running tests..."
-          exit 1  # Simulate failure
+          exit 3  # Simulate failure
         continue-on-error: true
 
       - name: Log Test Failure
